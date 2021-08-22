@@ -1,0 +1,36 @@
+html, body {
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+    overflow-y: hidden;
+}
+.column.na1{
+    margin-top: 50px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.column.catalogo{
+    max-width: 100%;
+    margin-top: 50px;
+    margin-right: 20px;
+}
+.content{
+    text-align: center;
+    max-width: 100%;
+}
+.content .price {
+    font-size: 1.333em;
+    font-weight: 700;
+    margin-right: 4px;
+    display: inline-block;
+}
+.old-price {
+    color: #999;
+    text-decoration: line-through;
+    font-size: 1em;
+    margin-right: 4px;
+    white-space: nowrap;
+}
+.price{
+    color: #ed991a ;
+}

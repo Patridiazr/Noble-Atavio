@@ -1,0 +1,223 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="stylesheet" href="{% static 'css/pedidos.css' %}">
+    <!-- Script para el modal del pedido -->
+    <script src = "https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
+    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+    <title>Pedidos</title>
+</head>
+<body>
+
+    {% include './navbar.html' %}
+
+    <div class="columns" >
+       <div class="column is-12">
+        <a class="modal-button" id="btn-flotante" data-target = "#modal">
+          <span class="icon">
+          <i class="fas fa-plus-square"></i>
+          </span>
+        </a>
+       </div>
+      <div class="column is-5">
+         <div class = "container" id="na-container-pedidos">
+           <!-- Boton para agregar pedidos -->
+            
+    
+            <div id = "modal" class = "modal">
+               <div class = "modal-background"></div>
+               <div class = "modal-content">
+                  <div class = "box">
+                     <article class = "media">
+                        <div class = "media-left">
+                        </div>
+                        <div class = "media-content">
+                           <form action="crear_Pedido" method="POST">
+                            {% csrf_token %}
+                           <div class = "content">
+                              <p>
+                                <!-- Formulario para agregar -->
+                                <!-- Rut cliente -->
+                                <div class="field">
+                                  <label class="label">Rut Cliente</label>
+                                  <div class="control">
+                                    <input class="input" name="rut_cliente" id="rut_cliente" type="number" placeholder="xx.xxx.xxx-x">
+                                  </div>
+                                </div>
+                                <!-- Nombre Cliente -->
+                                <div class="field">
+                                  <label class="label">Nombre Cliente</label>
+                                  <div class="control has-icons-left">
+                                    <input class="input " name="nombre_cliente" id="nombre_cliente" type="text" placeholder="Ej: Cristian" >
+                                    <span class="icon is-small is-left">
+                                      <i class="fas fa-user"></i>
+                                    </span>
+                                    <!-- <span class="icon is-small is-right">
+                                      <i class="fas fa-check"></i>
+                                    </span> -->
+                                  </div>
+                                </div>
+                                <!-- Apellido Cliente -->
+                                <div class="field">
+                                  <label class="label">Apellido Cliente</label>
+                                  <div class="control has-icons-left has-icons-right">
+                                    <input class="input " name="apellido_cliente" id="apellido_cliente" type="text" placeholder="Ej: Rojas" >
+                                    <span class="icon is-small is-left">
+                                      <i class="fas fa-user"></i>
+                                    </span>
+                                    <!-- <span class="icon is-small is-right">
+                                      <i class="fas fa-check"></i>
+                                    </span> -->
+                                  </div>
+                                </div>
+                                <!-- Fecha de entrega -->
+                                <div class="field">
+                                  <label class="label">Fecha Entrega</label>
+                                  <div class="control has-icons-left has-icons-right">
+                                    <input class="input" name="fecha_entrega" id="fecha_entrega" type="date" placeholder="Ej: DD-MM-YYYY" >
+                                    <span class="icon is-small is-left">
+                                      <i class="fas fa-user"></i>
+                                    </span>
+                                    <!-- <span class="icon is-small is-right">
+                                      <i class="fas fa-check"></i>
+                                    </span> -->
+                                  </div>
+                                </div>
+                                <!-- Direccion de entrega -->
+                                <div class="field">
+                                  <label class="label">Direccion Entrega</label>
+                                  <div class="control has-icons-left has-icons-right">
+                                    <input class="input " name="direccion_entrega" id="direccion_entrega" type="text" placeholder="Ej: Las Cañuelas 30" >
+                                    <span class="icon is-small is-left">
+                                      <i class="fas fa-user"></i>
+                                    </span>
+                                    <!-- <span class="icon is-small is-right">
+                                      <i class="fas fa-check"></i>
+                                    </span> -->
+                                  </div>
+                                </div>
+                                <!-- Telefono cliente -->
+                                <div class="field">
+                                  <label class="label">Telefono Cliente</label>
+                                  <div class="control has-icons-left has-icons-right">
+                                    <input class="input" name="telefono_cliente" id="telefono_cliente" type="number" placeholder="Ej: +569 xxxxxxxx" >
+                                    <span class="icon is-small is-left">
+                                      <i class="fas fa-user"></i>
+                                    </span>
+                                    <!-- <span class="icon is-small is-right">
+                                      <i class="fas fa-check"></i>
+                                    </span> -->
+                                  </div>
+                                </div>
+                                <!-- Email de contacto cliente -->
+                                <div class="field">
+                                  <label class="label">Email</label>
+                                  <div class="control has-icons-left has-icons-right">
+                                    <input class="input" name="email_cliente" id="email_cliente" type="email" placeholder="Ej: xxxxxx@xxxx.xx" >
+                                    <span class="icon is-small is-left">
+                                      <i class="fas fa-envelope"></i>
+                                    </span>
+                                    <!-- <span class="icon is-small is-right">
+                                      <i class="fas fa-exclamation-triangle"></i>
+                                    </span> -->
+                                  </div>
+                                </div>
+                                
+                                <!-- Detalle de pedido -->
+                                <div class="field">
+                                  <label class="label">Detalle Pedido</label>
+                                  <div class="control">
+                                    <textarea class="textarea" name="informacion_pedido" id="informacion_pedido" placeholder="Ej: Mesa de tamaño 240cm x 320cm, roble y mas caracteristicas"></textarea>
+                                  </div>
+                                </div>
+                               
+                                
+                                <div class="field is-grouped">
+                                  <div class="control">
+                                    <button class="button is-link">Submit</button>
+                                  </div>
+                                  <!-- <div class="control">
+                                    <button class="button is-link is-light">Cancel</button>
+                                  </div> -->
+                                </div>
+                              </p>
+                           </div>
+                         </form>
+                        </div>
+                     </article>
+                  </div>
+               </div>
+               <button class = "modal-close is-large" aria-label = "close"></button>
+            </div>
+         </div>
+    
+      </div>
+      <div class="column is-3"></div>
+    </div>
+    
+
+    <div class="table-container">
+      <table class="table is-hoverable is-fullwidth">
+         <thead>
+            <tr>
+               <th>Rut Cliente</th>
+               <th>Nobre Cliente</th>
+               <th>Apellido Cliente</title=></th>
+               <th>Fecha Entrega</th>
+               <th>Direccion Entrega</th>
+               <th>Telefono Cliente</title=></th>
+               <th>Email Cliente</title=></th>
+               <th>Informacion Pedido</title=></th>
+            </tr>
+            </thead>
+            <tbody>
+               {% if pedido %}
+               {% for p in pedido %}
+            <td>{{ p.rut_cliente}}</td>
+            <td>{{ p.nombre_cliente}}</td>
+            <td>{{ p.apellido_cliente}}</td>
+            <td>{{ p.fecha_entrega}}</td>
+            <td>{{ p.direccion_entrega}}</td>
+            <td>{{ p.telefono_cliente}}</td>
+            <td>{{ p.email_cliente}}</td>
+            <td>{{ p.informacion_pedido}}</td>
+            {% endfor %}
+            {% else %}
+            <h2>No Existen Registros</h2>
+            {% endif %}
+            </tbody>
+      </table>
+    </div>
+
+    <!-- {% include './footer.html' %} -->
+ 
+     
+     
+
+  <!-- Tabla con pedidos -->
+
+  <script>
+     $(".modal-button").click(function() {
+        var target = $(this).data("target");
+        $("html").addClass("is-clipped");
+        $(target).addClass("is-active");
+     });
+     
+     $(".modal-close").click(function() {
+        $("html").removeClass("is-clipped");
+        $(this).parent().removeClass("is-active");
+     });
+  </script>
+ 
+
+   
+    
+    
+</body>
+</html>

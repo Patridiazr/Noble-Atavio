@@ -179,18 +179,21 @@
             <tbody>
                {% if pedido %}
                {% for p in pedido %}
-            <td>{{ p.rut_cliente}}</td>
-            <td>{{ p.nombre_cliente}}</td>
-            <td>{{ p.apellido_cliente}}</td>
-            <td>{{ p.fecha_entrega}}</td>
-            <td>{{ p.direccion_entrega}}</td>
-            <td>{{ p.telefono_cliente}}</td>
-            <td>{{ p.email_cliente}}</td>
-            <td>{{ p.informacion_pedido}}</td>
-            {% endfor %}
-            {% else %}
-            <h2>No Existen Registros</h2>
-            {% endif %}
+            <tr>
+              <td>{{ p.rut_cliente}}</td>
+              <td>{{ p.nombre_cliente}}</td>
+              <td>{{ p.apellido_cliente}}</td>
+              <td>{{ p.fecha_entrega}}</td>
+              <td>{{ p.direccion_entrega}}</td>
+              <td>{{ p.telefono_cliente}}</td>
+              <td>{{ p.email_cliente}}</td>
+              <td>{{ p.informacion_pedido}}</td>
+              {% endfor %}
+              {% else %}
+              <h2>No Existen Registros</h2>
+              {% endif %}
+            </tr>
+            
             </tbody>
       </table>
     </div>

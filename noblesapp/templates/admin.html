@@ -1,0 +1,172 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="stylesheet" href="{% static 'css/admin.css' %}">
+    <script src = "https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
+    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <title>Administrador</title>
+</head>
+<body>
+    {% include './navbar.html' %}
+
+
+  <div class="columns">
+    <div class="column">
+      <h1>Mantenedor Productos</h1>
+    </div>
+  </div>
+
+
+    <div class="columns" >
+        <div class="column is-12">
+         <a class="modal-button" id="btn-flotante" data-target = "#modal">
+           <span class="icon">
+           <i class="fas fa-plus-square"></i>
+           </span>
+         </a>
+        </div>
+       <div class="column is-5">
+          <div class = "container" id="na-container-pedidos">
+            <!-- Boton para agregar pedidos -->
+             
+     
+             <div id = "modal" class = "modal">
+                <div class = "modal-background"></div>
+                <div class = "modal-content">
+                   <div class = "box">
+                      <article class = "media">
+                         <div class = "media-left">
+                         </div>
+                         <div class = "media-content">
+                            <form action="crear_Producto" method="POST">
+                             {% csrf_token %}
+                            <div class = "content">
+                               <p>
+                                 <!-- Formulario para agregar -->
+                                 <!-- Rut cliente -->
+                                 <div class="field">
+                                   <label class="label">Nombre Producto</label>
+                                   <div class="control">
+                                     <input class="input" name="nombre_producto" id="nombre_producto" type="text" placeholder="Vitrina">
+                                   </div>
+                                 </div>
+                                 <!-- Nombre Cliente -->
+                                 <div class="field">
+                                   <label class="label">Precio Oferta</label>
+                                   <div class="control has-icons-left">
+                                     <input class="input " name="precio_oferta" id="precio_oferta" type="text" placeholder="Ej: $89.990" >
+                                     <span class="icon is-small is-left">
+                                       <i class="fas fa-user"></i>
+                                     </span>
+                                     <!-- <span class="icon is-small is-right">
+                                       <i class="fas fa-check"></i>
+                                     </span> -->
+                                   </div>
+                                 </div>
+                                 <!-- Apellido Cliente -->
+                                 <div class="field">
+                                   <label class="label">Precio Real</label>
+                                   <div class="control has-icons-left has-icons-right">
+                                     <input class="input " name="precio_real" id="precio_real" type="text" placeholder="Ej: 109.000" >
+                                     <span class="icon is-small is-left">
+                                       <i class="fas fa-user"></i>
+                                     </span>
+                                     <!-- <span class="icon is-small is-right">
+                                       <i class="fas fa-check"></i>
+                                     </span> -->
+                                   </div>
+                                 </div>
+                                 <!-- Fecha de entrega -->
+                                 
+                                 <!-- Direccion de entrega -->
+                                 
+                                 
+                                 <div class="field is-grouped">
+                                   <div class="control">
+                                     <button class="button is-link">Agregrar</button>
+                                   </div>
+                                   <!-- <div class="control">
+                                     <button class="button is-link is-light">Cancel</button>
+                                   </div> -->
+                                 </div>
+                               </p>
+                            </div>
+                          </form>
+                         </div>
+                      </article>
+                   </div>
+                </div>
+                <button class = "modal-close is-large" aria-label = "close"></button>
+             </div>
+          </div>
+     
+       </div>
+       <div class="column is-3"></div>
+     </div>
+     
+ 
+     <div class="table-container">
+       <table class="table is-hoverable is-fullwidth">
+          <thead>
+             <tr>
+                <th>Id Producto</th>
+                <th>Nombre Producto</th>
+                <th>Precio Oferta</th>
+                <th>Precio Real</th>
+                <th>Acciones</th>
+             </tr>
+             </thead>
+             <tbody>
+                {% if producto %}
+                {% for p in producto %}
+                <tr>
+                    <td>{{ p.id}}</td>   
+                    <td>{{ p.nombre_producto}}</td>
+                    <td>{{ p.precio_oferta}}</td>
+                    <td>{{ p.precio_real}}</td>
+                    <td><a class="btn btn-info " href="#editar_u{{u.id}}}">Editar</a>
+                      <a class="btn btn-danger" data-toggle="modal" href="#eliminar_u{{u.id}}">Eliminar</a></td>
+                    {% endfor %}
+                    {% else %}
+                    <h2>No Existen Registros</h2>
+                    {% endif %}
+                </tr>
+             </tbody>
+       </table>
+     </div>
+
+  
+
+
+ 
+     <!-- {% include './footer.html' %} -->
+  
+      
+      
+ 
+   <!-- Tabla con pedidos -->
+ 
+   <script>
+      $(".modal-button").click(function() {
+         var target = $(this).data("target");
+         $("html").addClass("is-clipped");
+         $(target).addClass("is-active");
+      });
+      
+      $(".modal-close").click(function() {
+         $("html").removeClass("is-clipped");
+         $(this).parent().removeClass("is-active");
+      });
+   </script>
+  
+ 
+    
+
+
+</body>
+</html>

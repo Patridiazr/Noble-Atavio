@@ -1,19 +1,30 @@
+from itertools import product
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import Pedido
+from .models import Pedido, Producto
 
 # Create your views here.
 def index(request):
     return render(request, 'index.html')
 
 def catalogo(request):
-    return render(request, 'catalogo.html')
+    producto = Producto.objects.all()
+    contexto = {'producto': producto}
+    return render(request, 'catalogo.html',contexto)
 
 def pedidos(request):
     pedido = Pedido.objects.all()
     contexto = {'pedido': pedido}
     return render(request, 'pedidos.html',contexto)
 
+def admin(request):
+    producto = Producto.objects.all()
+    contexto = {'producto': producto}
+    return render(request,'admin.html',contexto)
+
+def detalle_producto(request,pk):
+    pk = Producto.objects.get(pk=pk)
+    return render(request, 'detalle_producto.html',{'pk':pk})
 
 # CRUD Pedidos
 def crear_Pedido(request):
@@ -30,4 +41,13 @@ def crear_Pedido(request):
     telefono_cliente=telefono_cliente,email_cliente=email_cliente)
     pedido.save()
     return HttpResponse('<script>alert("Pedido registrado");'+
+                        ' window.location.href="/";</script>')
+
+def crear_Producto(request):
+    nombre_producto = request.POST.get('nombre_producto')
+    precio_oferta = request.POST.get('precio_oferta')
+    precio_real = request.POST.get('precio_real')
+    producto = Producto(nombre_producto=nombre_producto, precio_oferta=precio_oferta, precio_real=precio_real)
+    producto.save()
+    return HttpResponse('<script>alert("Producto registrado");'+
                         ' window.location.href="/";</script>')

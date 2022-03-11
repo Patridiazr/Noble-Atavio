@@ -17,3 +17,15 @@ html, body {
     height: 100%;
     display: flex;
   }
+  #msg-left {
+    padding: 30px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+ }
+ .message-header{
+  background-color: #5DC1B9;
+ }
+ .message-header p{
+   font: 2em sans-serif;
+   align-items: center;
+ }
+ 

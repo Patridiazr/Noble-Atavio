@@ -4,6 +4,9 @@ from django.http import HttpResponse
 from .models import Pedido, Producto
 
 # Create your views here.
+def inicio(request):
+    return render(request, 'inicio.html')
+
 def index(request):
     return render(request, 'index.html')
 

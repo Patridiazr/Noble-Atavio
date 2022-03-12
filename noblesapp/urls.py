@@ -7,7 +7,7 @@ from django.contrib import admin
 # Rutas para paginas
 urlpatterns = [
     path('', views.index, name='index'),
-    path('', views.inicio, name='inicio'),
+    path('inicio/', views.inicio, name='inicio'),
     path('catalogo/', views.catalogo, name='catalogo'),
     path('pedidos/', views.pedidos, name='pedidos'),
     path('administrador/',views.admin, name='admin'),
